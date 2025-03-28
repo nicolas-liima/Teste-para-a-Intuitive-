@@ -5,9 +5,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.io.IOException;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +39,20 @@ public class Scraper {
         }
 
         return pdfLinks;
+    }
+
+    public void downloadPdf(String fileUrl, String fileName) {
+
+        try (InputStream in = new URL(fileUrl).openStream()) {
+            Path downloadPath = Path.of(fileName);
+            Files.createDirectories(downloadPath.getParent());
+
+            Files.copy(in, downloadPath, StandardCopyOption.REPLACE_EXISTING);
+
+            System.out.println("O download foi concluído: " + downloadPath.toAbsolutePath());
+        } catch (IOException e) {
+            System.err.println("Ocorreu um erro: Erro ao baixar o arquivo " + fileUrl + ": " + e.getMessage());
+        }
     }
 
 
