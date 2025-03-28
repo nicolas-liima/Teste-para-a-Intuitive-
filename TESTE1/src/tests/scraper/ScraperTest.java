@@ -59,6 +59,36 @@ class ScraperTest {
         }
     }
 
+    @Test
+    void testFilesToZip() {
+        Scraper scraper = new Scraper();
+        Path downloadFolder = Paths.get("src\\downloader\\downloads");
+        Path zipFile = Paths.get("src\\zipper\\anexos.zip");
 
+        try {
+            Files.createDirectories(downloadFolder);
+
+
+            scraper.downloadPdf(
+                    "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf",
+                    downloadFolder.resolve("Anexo_I.pdf").toString()
+            );
+
+            scraper.downloadPdf(
+                    "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos/Anexo_II_DUT_2021_RN_465.2021_RN628.2025_RN629.2025.pdf",
+                    downloadFolder.resolve("Anexo_II.pdf").toString()
+            );
+
+
+            scraper.FilesToZip(downloadFolder, zipFile);
+
+
+            assertTrue(Files.exists(zipFile));
+            assertTrue(Files.size(zipFile) > 0);
+
+        } catch (Exception e) {
+            fail("Ocorreu um erro: Erro no teste de compactação: " + e.getMessage());
+        }
+    }
 
 }
