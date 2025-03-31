@@ -3,11 +3,10 @@ package tests;
 import extractor.ExtractorPdf;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
 
 
-public class StractorTests {
+public class ExtractorTests {
 
     @Test
     public void testExtractTextFromPdf() {
