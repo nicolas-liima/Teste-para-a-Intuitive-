@@ -6,7 +6,6 @@ import scraper.downloadPdf.DownloadPdf;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -35,7 +34,7 @@ public class ExtractorTests {
             assertTrue(extractedText.contains("Texto esperado no PDF"), "O PDF não contém o texto esperado.");
 
         }catch(Exception e) {
-            System.out.println("Erro ao ler o arquivo PDF!" + e.getMessage());
+            System.out.println("Ocorreu um erro: Erro ao ler o arquivo PDF!" + e.getMessage());
         }
 
     }
