@@ -1,5 +1,7 @@
 
 DROP TABLE IF EXISTS demonstracoes_temp;
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
 
 CREATE TABLE IF NOT EXISTS operadoras (
     id SERIAL PRIMARY KEY,
@@ -91,7 +93,6 @@ WHERE
 -- === 3T2023 ===
 \COPY demonstracoes_temp FROM 'C:/Users/Nicolas liima/Desktop/Intuitive/TESTE3/src/dados/3T2023.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
 INSERT INTO demonstracoes_contabeis (data, registro_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
-INSERT INTO demonstracoes_contabeis (data, registro_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
 SELECT
     TO_DATE(dt.data, 'YYYY-MM-DD'),
     dt.registro_ans,
@@ -180,28 +181,35 @@ WHERE
     dt.data ~ '^\d{4}-\d{2}-\d{2}$';
 	
 
-SELECT 
-    o.razao_social, 
-    d.data, 
+SELECT
+    o.razao_social,
+    d.data,
     SUM(d.vl_saldo_final) AS total_despesas
 FROM demonstracoes_contabeis d
 JOIN operadoras o ON d.registro_ans = o.registro_ans
-WHERE 
+WHERE
     d.data >= (SELECT DATE_TRUNC('quarter', MAX(data)) FROM demonstracoes_contabeis)
-    AND d.descricao ILIKE '%SINISTROS CONHECIDOS OU AVISADOS DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%'
+    AND unaccent(d.descricao) ILIKE '%sinistros%'
+    AND unaccent(d.descricao) ILIKE '%assistencia%'
+    AND unaccent(d.descricao) ILIKE '%medico%'
+    AND unaccent(d.descricao) ILIKE '%hospitalar%'
 GROUP BY o.razao_social, d.data
 ORDER BY total_despesas DESC
 LIMIT 10;
 
-SELECT 
-    o.razao_social, 
-    EXTRACT(YEAR FROM d.data) AS ano, 
+
+SELECT
+    o.razao_social,
+    d.data,
     SUM(d.vl_saldo_final) AS total_despesas
 FROM demonstracoes_contabeis d
 JOIN operadoras o ON d.registro_ans = o.registro_ans
-WHERE 
+WHERE
     d.data >= (SELECT DATE_TRUNC('year', MAX(data)) FROM demonstracoes_contabeis)
-    AND d.descricao ILIKE '%SINISTROS CONHECIDOS OU AVISADOS DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%'
-GROUP BY o.razao_social, ano
+    AND unaccent(d.descricao) ILIKE '%sinistros%'
+    AND unaccent(d.descricao) ILIKE '%assistencia%'
+    AND unaccent(d.descricao) ILIKE '%medico%'
+    AND unaccent(d.descricao) ILIKE '%hospitalar%'
+GROUP BY o.razao_social, d.data
 ORDER BY total_despesas DESC
 LIMIT 10;
