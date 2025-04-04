@@ -23,6 +23,7 @@ def buscar_operadoras(term: str):
 
 @app.get("/buscar")
 def buscar(term: str = Query(..., min_length=2, description="Termo de busca")):
-    print("RECEBIDO", term)
+    print("RECEBIDO:", term)
     resultado = buscar_operadoras(term)
+    print("ENCONTRADO:", len(resultado), "resultados")
     return {"resultado": resultado}
