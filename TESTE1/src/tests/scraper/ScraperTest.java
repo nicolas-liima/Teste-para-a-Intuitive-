@@ -4,7 +4,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
-import scraper.Scraper;
+import scraper.FilesToZip.FilesToZip;
+import scraper.GetPdf.GetPdf;
+import scraper.downloadPdf.DownloadPdf;
+
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,10 +15,10 @@ class ScraperTest {
 
     @Test
     void testGetPdf() {
-        Scraper scraper = new Scraper();
+        GetPdf getPdf = new GetPdf();
         String url = "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos";
 
-        Set<String> links = scraper.getPdf(url);
+        Set<String> links = getPdf.getPdf(url);
 
         assertNotNull(links);
         assertFalse(links.isEmpty());
@@ -27,14 +30,14 @@ class ScraperTest {
 
     @Test
     void testDownloadPdfs() {
-        Scraper scraper = new Scraper();
+        DownloadPdf downloadPdf = new DownloadPdf();
         Path downloadFolder = Paths.get("src\\downloader\\download");
 
         try {
             Files.createDirectories(downloadFolder);
 
 
-            scraper.downloadPdf(
+            downloadPdf.downloadPdf(
                     "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf",
                     downloadFolder.resolve("Anexo_I.pdf").toString()
             );
@@ -44,7 +47,7 @@ class ScraperTest {
             assertTrue(Files.size(filePath1) > 0);
 
 
-            scraper.downloadPdf(
+            downloadPdf.downloadPdf(
                     "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos/Anexo_II_DUT_2021_RN_465.2021_RN628.2025_RN629.2025.pdf",
                     downloadFolder.resolve("Anexo_II.pdf").toString()
             );
@@ -61,7 +64,8 @@ class ScraperTest {
 
     @Test
     void testFilesToZip() {
-        Scraper scraper = new Scraper();
+        FilesToZip filesToZip = new FilesToZip();
+        DownloadPdf downloadPdf = new DownloadPdf();
         Path downloadFolder = Paths.get("src\\downloader\\downloads");
         Path zipFile = Paths.get("src\\zipper\\anexos.zip");
 
@@ -69,18 +73,18 @@ class ScraperTest {
             Files.createDirectories(downloadFolder);
 
 
-            scraper.downloadPdf(
+            downloadPdf.downloadPdf(
                     "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf",
                     downloadFolder.resolve("Anexo_I.pdf").toString()
             );
 
-            scraper.downloadPdf(
+            downloadPdf.downloadPdf(
                     "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos/Anexo_II_DUT_2021_RN_465.2021_RN628.2025_RN629.2025.pdf",
                     downloadFolder.resolve("Anexo_II.pdf").toString()
             );
 
 
-            scraper.FilesToZip(downloadFolder, zipFile);
+            filesToZip.filesToZip(downloadFolder, zipFile);
 
 
             assertTrue(Files.exists(zipFile));
