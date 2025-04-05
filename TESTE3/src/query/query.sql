@@ -52,7 +52,7 @@ CREATE TEMP TABLE demonstracoes_temp (
 
 
 -- === 1T2023 ===
-\COPY demonstracoes_temp FROM 'C:/Users/Nicolas liima/Desktop/Intuitive/TESTE3/src/dados/1T2023.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
+\COPY demonstracoes_temp FROM 'Intuitive/TESTE3/src/dados/1T2023.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
 INSERT INTO demonstracoes_contabeis (data, registro_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
 SELECT
     (CASE
@@ -76,7 +76,7 @@ WHERE
     );
 
 -- === 2T2023 ===
-\COPY demonstracoes_temp FROM 'C:/Users/Nicolas liima/Desktop/Intuitive/TESTE3/src/dados/2T2023.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
+\COPY demonstracoes_temp FROM 'Intuitive/TESTE3/src/dados/2T2023.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
 INSERT INTO demonstracoes_contabeis (data, registro_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
 SELECT
     TO_DATE(dt.data, 'YYYY-MM-DD'),
@@ -91,7 +91,7 @@ WHERE
     dt.data ~ '^\d{4}-\d{2}-\d{2}$';
 	
 -- === 3T2023 ===
-\COPY demonstracoes_temp FROM 'C:/Users/Nicolas liima/Desktop/Intuitive/TESTE3/src/dados/3T2023.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
+\COPY demonstracoes_temp FROM 'Intuitive/TESTE3/src/dados/3T2023.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
 INSERT INTO demonstracoes_contabeis (data, registro_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
 SELECT
     TO_DATE(dt.data, 'YYYY-MM-DD'),
@@ -106,7 +106,7 @@ WHERE
     dt.data ~ '^\d{4}-\d{2}-\d{2}$';
 
 -- === 4T2023 ===
-\COPY demonstracoes_temp FROM 'C:/Users/Nicolas liima/Desktop/Intuitive/TESTE3/src/dados/4T2023.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
+\COPY demonstracoes_temp FROM 'Intuitive/TESTE3/src/dados/4T2023.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
 INSERT INTO demonstracoes_contabeis (data, registro_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
 SELECT
     TO_DATE(dt.data, 'YYYY-MM-DD'),
@@ -121,7 +121,7 @@ WHERE
     dt.data ~ '^\d{4}-\d{2}-\d{2}$';
 	
 -- === 1T2024 ===
-\COPY demonstracoes_temp FROM 'C:/Users/Nicolas liima/Desktop/Intuitive/TESTE3/src/dados/1T2024.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
+\COPY demonstracoes_temp FROM 'Intuitive/TESTE3/src/dados/1T2024.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
 INSERT INTO demonstracoes_contabeis (data, registro_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
 SELECT
     TO_DATE(dt.data, 'YYYY-MM-DD'),
@@ -136,7 +136,7 @@ WHERE
     dt.data ~ '^\d{4}-\d{2}-\d{2}$';
 	
 -- === 2T2024 ===
-\COPY demonstracoes_temp FROM 'C:/Users/Nicolas liima/Desktop/Intuitive/TESTE3/src/dados/2T2024.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
+\COPY demonstracoes_temp FROM 'Intuitive/TESTE3/src/dados/2T2024.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
 INSERT INTO demonstracoes_contabeis (data, registro_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
 SELECT
     TO_DATE(dt.data, 'YYYY-MM-DD'),
@@ -151,7 +151,7 @@ WHERE
     dt.data ~ '^\d{4}-\d{2}-\d{2}$';
 	
 -- === 3T2024 ===
-\COPY demonstracoes_temp FROM 'C:/Users/Nicolas liima/Desktop/Intuitive/TESTE3/src/dados/3T2024.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
+\COPY demonstracoes_temp FROM 'Intuitive/TESTE3/src/dados/3T2024.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
 INSERT INTO demonstracoes_contabeis (data, registro_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
 SELECT
     TO_DATE(dt.data, 'YYYY-MM-DD'),
@@ -166,7 +166,7 @@ WHERE
     dt.data ~ '^\d{4}-\d{2}-\d{2}$';
 
 -- === 4T2024 ===
-\COPY demonstracoes_temp FROM 'C:/Users/Nicolas liima/Desktop/Intuitive/TESTE3/src/dados/4T2024.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
+\COPY demonstracoes_temp FROM 'Intuitive/TESTE3/src/dados/4T2024.csv' DELIMITER ';' CSV HEADER ENCODING 'UTF8';
 INSERT INTO demonstracoes_contabeis (data, registro_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
 SELECT
     TO_DATE(dt.data, 'YYYY-MM-DD'),
